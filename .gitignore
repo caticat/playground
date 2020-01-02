@@ -1,0 +1,12 @@
+*.lastbuildstate
+unsuccessfulbuild
+*.log
+*.tlog
+*.exe
+*.pdb
+*.out
+*.ilk
+*.opendb
+.vs
+*.obj
+*.idb
