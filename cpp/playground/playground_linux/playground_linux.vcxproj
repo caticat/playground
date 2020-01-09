@@ -74,12 +74,19 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <MultiProcNumber>4</MultiProcNumber>
+  </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="test_circle_queue.cpp" />
     <ClCompile Include="test_condition.cpp" />
+    <ClCompile Include="test_perf.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="test_circle_queue.h" />
     <ClInclude Include="test_condition.h" />
+    <ClInclude Include="test_perf.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
