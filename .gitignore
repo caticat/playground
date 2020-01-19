@@ -10,3 +10,4 @@ unsuccessfulbuild
 .vs
 *.obj
 *.idb
+*.idea
