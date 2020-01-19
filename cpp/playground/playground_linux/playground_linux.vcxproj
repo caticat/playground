@@ -82,17 +82,22 @@
     <ClCompile Include="test_circle_queue.cpp" />
     <ClCompile Include="test_condition.cpp" />
     <ClCompile Include="test_macro.cpp" />
+    <ClCompile Include="test_new.cpp" />
     <ClCompile Include="test_perf.cpp" />
     <ClCompile Include="test_reference.cpp" />
     <ClCompile Include="test_time_cost.cpp" />
+    <ClCompile Include="test_typedef.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_circle_queue.h" />
     <ClInclude Include="test_condition.h" />
     <ClInclude Include="test_macro.h" />
+    <ClInclude Include="test_new.h" />
+    <ClInclude Include="test_new_1.h" />
     <ClInclude Include="test_perf.h" />
     <ClInclude Include="test_reference.h" />
     <ClInclude Include="test_time_cost.h" />
+    <ClInclude Include="test_typedef.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
