@@ -12,6 +12,11 @@
 #include "test_hiredis.h"
 #include "test_mysql.h"
 #include "test_argv.h"
+#include "test_random.h"
+#include "test_template.h"
+#include "test_set.h"
+#include "test_try_catch.h"
+
 
 using namespace std;
 
@@ -33,6 +38,11 @@ int main()
 	//test_hiredis::test(); // hiredis测试
 	test_mysql::test(); // mysql测试
 	//test_argv::test(); // argv测试
+	//test_new::test(); // new测试
+	//test_random::test(); // random测试
+	//test_template::test(); // 模板测试
+	//test_set::test(); // set测试
+	test_try_catch::test(); // try_catch测试
 
 	cout << "playground结束" << endl;
 

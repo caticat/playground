@@ -77,6 +77,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <MultiProcNumber>4</MultiProcNumber>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <MultiProcNumber>3</MultiProcNumber>
+  </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test_argv.cpp" />
@@ -87,12 +90,17 @@
     <ClCompile Include="test_mysql.cpp" />
     <ClCompile Include="test_new.cpp" />
     <ClCompile Include="test_perf.cpp" />
+    <ClCompile Include="test_random.cpp" />
     <ClCompile Include="test_reference.cpp" />
+    <ClCompile Include="test_set.cpp" />
+    <ClCompile Include="test_template.cpp" />
     <ClCompile Include="test_time_cost.cpp" />
+    <ClCompile Include="test_try_catch.cpp" />
     <ClCompile Include="test_typedef.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_argv.h" />
+    <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="test_circle_queue.h" />
     <ClInclude Include="test_condition.h" />
     <ClInclude Include="test_hiredis.h" />
@@ -101,8 +109,12 @@
     <ClInclude Include="test_new.h" />
     <ClInclude Include="test_new_1.h" />
     <ClInclude Include="test_perf.h" />
+    <ClInclude Include="test_random.h" />
     <ClInclude Include="test_reference.h" />
+    <ClInclude Include="test_set.h" />
+    <ClInclude Include="test_template.h" />
     <ClInclude Include="test_time_cost.h" />
+    <ClInclude Include="test_try_catch.h" />
     <ClInclude Include="test_typedef.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
