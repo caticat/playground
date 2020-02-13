@@ -79,9 +79,12 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="test_argv.cpp" />
     <ClCompile Include="test_circle_queue.cpp" />
     <ClCompile Include="test_condition.cpp" />
+    <ClCompile Include="test_hiredis.cpp" />
     <ClCompile Include="test_macro.cpp" />
+    <ClCompile Include="test_mysql.cpp" />
     <ClCompile Include="test_new.cpp" />
     <ClCompile Include="test_perf.cpp" />
     <ClCompile Include="test_reference.cpp" />
@@ -89,9 +92,12 @@
     <ClCompile Include="test_typedef.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="test_argv.h" />
     <ClInclude Include="test_circle_queue.h" />
     <ClInclude Include="test_condition.h" />
+    <ClInclude Include="test_hiredis.h" />
     <ClInclude Include="test_macro.h" />
+    <ClInclude Include="test_mysql.h" />
     <ClInclude Include="test_new.h" />
     <ClInclude Include="test_new_1.h" />
     <ClInclude Include="test_perf.h" />
@@ -101,8 +107,21 @@
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <LibraryDependencies>pthread;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>mysqlclient;pthread;hiredis;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib64/mysql;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>/usr/local/include;/usr/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Link>
+      <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib64/mysql;%(Link.AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LibraryDependencies>mysqlclient;pthread;hiredis;</LibraryDependencies>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>/usr/local/include;/usr/include;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

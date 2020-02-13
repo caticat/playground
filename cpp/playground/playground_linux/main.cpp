@@ -9,6 +9,9 @@
 #include "test_macro.h"
 #include "test_typedef.h"
 #include "test_new.h"
+#include "test_hiredis.h"
+#include "test_mysql.h"
+#include "test_argv.h"
 
 using namespace std;
 
@@ -26,7 +29,10 @@ int main()
 	//test_reference::test_change(); // 引用测试,函数调用与内容修改
 	//test_macro::test(); // 测试宏
 	//test_typedef::test(); // typedef作用域测试
-	test_new::test(); // new测试
+	//test_new::test(); // new测试
+	//test_hiredis::test(); // hiredis测试
+	test_mysql::test(); // mysql测试
+	//test_argv::test(); // argv测试
 
 	cout << "playground结束" << endl;
 

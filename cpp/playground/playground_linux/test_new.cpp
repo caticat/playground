@@ -1,33 +1,33 @@
 #include "test_new.h"
 #include "test_new_1.h"
 
-void* operator new(size_t size)
-{
-	cout << "new(),size:" << size << endl;
-	if (size == 0)
-		return nullptr;
-	void* p = malloc(size);
-	return p;
-}
-
-void* operator new[](size_t size)
-{
-	cout << "new[](), size:" << size << endl;
-	return operator new(size);
-}
-
-void operator delete(void* p)
-{
-	cout << "delete()" << endl;
-	if (p != nullptr)
-		free(p);
-}
-
-void operator delete[](void* p)
-{
-	cout << "delete[]()" << endl;
-	operator delete(p);
-}
+//void* operator new(size_t size)
+//{
+//	cout << "new(),size:" << size << endl;
+//	if (size == 0)
+//		return nullptr;
+//	void* p = malloc(size);
+//	return p;
+//}
+//
+//void* operator new[](size_t size)
+//{
+//	cout << "new[](), size:" << size << endl;
+//	return operator new(size);
+//}
+//
+//void operator delete(void* p)
+//{
+//	cout << "delete()" << endl;
+//	if (p != nullptr)
+//		free(p);
+//}
+//
+//void operator delete[](void* p)
+//{
+//	cout << "delete[]()" << endl;
+//	operator delete(p);
+//}
 
 namespace test_new
 {
