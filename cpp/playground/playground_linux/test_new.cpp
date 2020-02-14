@@ -42,17 +42,35 @@ namespace test_new
 		cout << "test3()结束" << endl;
 	}
 
+	void test4()
+	{
+		cout << "test4()开始" << endl;
+
+		int count = 3;
+		A* a = (A*)operator new(sizeof(A) * count);
+		for (int i = 0; i < count; i++)
+		{
+			new(&a[i])A();
+		}
+
+		delete[] a;
+
+		cout << "test4()结束" << endl;
+	}
+
 	void test()
 	{
 		cout << "test()开始" << endl;
 
-		A* a = new A;
-		a->a = 256;
-		delete a;
+		//A* a = new A;
+		//a->a = 256;
+		//delete a;
 
-		test1();
-		test2();
-		test3();
+		//test1();
+		//test2();
+		//test3();
+
+		test4();
 
 		cout << "test()结束" << endl;
 	}

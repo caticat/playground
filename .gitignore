@@ -11,3 +11,4 @@ unsuccessfulbuild
 *.obj
 *.idb
 *.idea
+*.a

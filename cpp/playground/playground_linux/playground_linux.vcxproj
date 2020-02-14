@@ -85,6 +85,7 @@
     <ClCompile Include="test_argv.cpp" />
     <ClCompile Include="test_circle_queue.cpp" />
     <ClCompile Include="test_condition.cpp" />
+    <ClCompile Include="test_epoll.cpp" />
     <ClCompile Include="test_hiredis.cpp" />
     <ClCompile Include="test_macro.cpp" />
     <ClCompile Include="test_mysql.cpp" />
@@ -93,6 +94,7 @@
     <ClCompile Include="test_random.cpp" />
     <ClCompile Include="test_reference.cpp" />
     <ClCompile Include="test_set.cpp" />
+    <ClCompile Include="test_static.cpp" />
     <ClCompile Include="test_template.cpp" />
     <ClCompile Include="test_time_cost.cpp" />
     <ClCompile Include="test_try_catch.cpp" />
@@ -103,6 +105,7 @@
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="test_circle_queue.h" />
     <ClInclude Include="test_condition.h" />
+    <ClInclude Include="test_epoll.h" />
     <ClInclude Include="test_hiredis.h" />
     <ClInclude Include="test_macro.h" />
     <ClInclude Include="test_mysql.h" />
@@ -112,6 +115,7 @@
     <ClInclude Include="test_random.h" />
     <ClInclude Include="test_reference.h" />
     <ClInclude Include="test_set.h" />
+    <ClInclude Include="test_static.h" />
     <ClInclude Include="test_template.h" />
     <ClInclude Include="test_time_cost.h" />
     <ClInclude Include="test_try_catch.h" />
@@ -119,7 +123,7 @@
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <LibraryDependencies>mysqlclient;pthread;hiredis;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>pthread;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib64/mysql;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>

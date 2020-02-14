@@ -1,4 +1,4 @@
-package main
+package test_redis
 
 import "fmt"
 
@@ -16,7 +16,7 @@ func calcStress(dataLen, requestPerSecond float64, prefix string) {
 	fmt.Printf("[%s]处理速度:%v(MB/S),%v(次/S)\n", prefix, pDS, requestPerSecond)
 }
 
-func main() {
+func Test() {
 	fmt.Println("\n本地测试debug")
 	analyzeStress(10000, 1024*64, 1830879, "SET")
 	analyzeStress(10000, 1024*64, 1447705,"GET")
@@ -57,3 +57,4 @@ func main() {
 	analyzeStress(10000, 1024*64, 17437459,"INSERT")
 	analyzeStress(10000, 1024*64, 7663155,"SELECT")
 }
+
