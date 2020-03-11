@@ -13,8 +13,9 @@ func Test() {
 		NewPosXY(4, 5),
 		NewPosXY(5, 5),
 		NewPosXY(6, 5),
+		NewPosXY(7, 5),
 	})
-	//c.SetPosBorder(NewPosXY(8, 8))
+	c.SetPosBorder(NewPosXY(9, 7))
 	c.Calculate()
 	c.Graph()
 }

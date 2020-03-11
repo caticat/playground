@@ -39,25 +39,16 @@ func (this *AStarCalculator) Calculate() bool {
 		return false
 	}
 
-	//
-	this.posCur = NewNewAStarNodeByPos(this.posBegin)
-	if this.isDone(this.posCur.Pos()) {
-		this.result = this.posCur
-		return true
-	}
-	this.sliOpen = append(this.sliOpen, this.posCur)
-	this.posCur = this.getMinFNode()
+	// 将起始点加入到开列表
+	this.sliOpen = append(this.sliOpen, NewAStarNodeByPos(this.posBegin))
 
-	for ; this.posCur != nil; this.posCur = this.getMinFNode() {
-		isDone, e := this.step()
-		if e != nil {
-			fmt.Println("出错了:", e)
-			return false
-		}
-		if isDone {
+	// 循环寻路
+	for this.posCur = this.getMinFNode(); this.posCur != nil; this.posCur = this.getMinFNode() {
+		if this.isDone(this.posCur.Pos()) {
 			this.result = this.posCur
 			return true
 		}
+		this.step()
 	}
 
 	return false // 寻路失败
@@ -81,38 +72,46 @@ func (this *AStarCalculator) Graph() {
 		sliPos[i], sliPos[l-i-1] = sliPos[l-i-1], sliPos[i]
 	}
 
-	xMax := this.posBorder.X()
-	yMax := this.posBorder.Y()
+	xMax := this.posBorder.X() + 1
+	yMax := this.posBorder.Y() + 1
 	fmt.Println("xMax:", xMax, "yMax:", yMax)
 
 	buf := &bytes.Buffer{}
 	cur := NewPos()
 	for y := uint32(0); y <= yMax; y++ {
 		for x := uint32(0); x <= xMax; x++ {
-			cur.SetX(x)
-			cur.SetY(y)
-			if *this.posBegin == *cur {
-				buf.WriteString("A")
-			} else if *this.posEnd == *cur {
-				buf.WriteString("B")
-			} else if this.isPosInSlice(cur, sliPos) {
-				buf.WriteString("*")
-			} else if this.isPosInSlice(cur, this.sliBlock) {
-				buf.WriteString("+")
-			} else if (x == 0) || (x == xMax) {
-				if (y == 0) || (y == yMax) {
-					buf.WriteString("+")
+			if x == 0 && y == 0 {
+				buf.WriteString("+ ")
+			} else if x == 0 {
+				buf.WriteString(fmt.Sprintf("%v ", y-1))
+			} else if y == 0 {
+				buf.WriteString(fmt.Sprintf("%v ", x-1))
+			} else if x == xMax {
+				if y == yMax {
+					buf.WriteString("+ ")
 				} else {
-					buf.WriteString("|")
+					buf.WriteString("| ")
 				}
-			} else if (y == 0) || (y == yMax) {
-				if (x == 0) || (x == xMax) {
-					buf.WriteString("+")
+			} else if y == yMax {
+				if x == xMax {
+					buf.WriteString("+ ")
 				} else {
-					buf.WriteString("_")
+					buf.WriteString("_ ")
 				}
 			} else {
-				buf.WriteString(" ")
+				cur.SetX(x - 1)
+				cur.SetY(y - 1)
+				if *this.posBegin == *cur {
+					buf.WriteString("A ")
+				} else if *this.posEnd == *cur {
+					buf.WriteString("B ")
+				} else if this.isPosInSlice(cur, sliPos) {
+					buf.WriteString("* ")
+				} else if this.isPosInSlice(cur, this.sliBlock) {
+					buf.WriteString("= ")
+				} else {
+					buf.WriteString("  ")
+				}
 			}
 		}
 		buf.WriteString("\n")
@@ -160,11 +159,7 @@ func (this *AStarCalculator) getMinFNode() *AStarNode {
 	// 找到最小值
 	var r *AStarNode = nil
 	for _, n := range this.sliOpen {
-		if r == nil {
-			r = n
-			continue
-		}
-		if n.f() >= r.f() {
+		if (r != nil) && (n.f() >= r.f()) {
 			continue
 		}
 		r = n
@@ -193,12 +188,12 @@ func (this *AStarCalculator) getMinFNode() *AStarNode {
 	return r
 }
 
-func (this *AStarCalculator) step() (bool, error) {
+func (this *AStarCalculator) step() {
 	xCur := this.posCur.Pos().X()
 	yCur := this.posCur.Pos().Y()
 	var e error
 
-	// 四个点
+	// 整理上下左右四个点
 	sliAround := make([]*Pos, 0, 4)
 	if xCur > 0 {
 		sliAround = append(sliAround, NewPosXY(xCur-1, yCur))
@@ -210,27 +205,24 @@ func (this *AStarCalculator) step() (bool, error) {
 	sliAround = append(sliAround, NewPosXY(xCur+1, yCur))
 
 	// 遍历处理
-	for _, pos := range sliAround {
-		node := NewAStarNode()
+	for _, p := range sliAround {
+		node := NewAStarNodeByPos(p)
 		node.pFront = this.posCur
 		node.g = this.posCur.g + 1
-		p := node.Pos()
-		*p = *pos
 
 		if !this.isInBorder(p) {
 			continue
 		}
-
 		if this.isInBlock(p) {
 			continue
 		}
-
 		if this.isInClose(p) {
 			continue
 		}
 		node.h, e = this.calcH(p)
 		if e != nil {
-			return false, e
+			fmt.Println("计算H出错:", e)
+			return
 		}
 		//fmt.Println("测试点:%v", node.Show())
 		if openNode := this.getOpenNode(p); openNode != nil {
@@ -245,13 +237,7 @@ func (this *AStarCalculator) step() (bool, error) {
 			this.sliOpen = append(this.sliOpen, node)
 			fmt.Println("新增点:", node.Show())
 		}
-		if this.isDone(p) {
-			this.posCur = node
-			return true, nil
-		}
 	}
-
-	return false, nil
 }
 
 func (this *AStarCalculator) isInClose(pos *Pos) bool {
@@ -264,6 +250,9 @@ func (this *AStarCalculator) isInClose(pos *Pos) bool {
 }
 
 func (this *AStarCalculator) isInBorder(pos *Pos) bool {
+	if this.posBorder == nil {
+		return false
+	}
 	if pos.X() >= this.posBorder.X() {
 		return false
 	}
@@ -278,6 +267,9 @@ func (this *AStarCalculator) isInBlock(pos *Pos) bool {
 }
 
 func (this *AStarCalculator) isPosInSlice(pos *Pos, sliData []*Pos) bool {
+	if pos == nil {
+		return false
+	}
 	for _, data := range sliData {
 		if *data == *pos {
 			return true

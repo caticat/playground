@@ -15,7 +15,7 @@ func NewAStarNode() *AStarNode {
 	}
 }
 
-func NewNewAStarNodeByPos(pos *Pos) *AStarNode {
+func NewAStarNodeByPos(pos *Pos) *AStarNode {
 	a := NewAStarNode()
 	a.SetPos(pos)
 	return a
