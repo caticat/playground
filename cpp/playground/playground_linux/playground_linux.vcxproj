@@ -88,17 +88,21 @@
     <ClCompile Include="test_epoll.cpp" />
     <ClCompile Include="test_hiredis.cpp" />
     <ClCompile Include="test_macro.cpp" />
+    <ClCompile Include="test_map.cpp" />
     <ClCompile Include="test_mysql.cpp" />
     <ClCompile Include="test_new.cpp" />
     <ClCompile Include="test_perf.cpp" />
     <ClCompile Include="test_random.cpp" />
     <ClCompile Include="test_reference.cpp" />
     <ClCompile Include="test_set.cpp" />
+    <ClCompile Include="test_size.cpp" />
+    <ClCompile Include="test_sort.cpp" />
     <ClCompile Include="test_static.cpp" />
     <ClCompile Include="test_template.cpp" />
     <ClCompile Include="test_time_cost.cpp" />
     <ClCompile Include="test_try_catch.cpp" />
     <ClCompile Include="test_typedef.cpp" />
+    <ClCompile Include="test_vtable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_argv.h" />
@@ -108,6 +112,7 @@
     <ClInclude Include="test_epoll.h" />
     <ClInclude Include="test_hiredis.h" />
     <ClInclude Include="test_macro.h" />
+    <ClInclude Include="test_map.h" />
     <ClInclude Include="test_mysql.h" />
     <ClInclude Include="test_new.h" />
     <ClInclude Include="test_new_1.h" />
@@ -115,11 +120,14 @@
     <ClInclude Include="test_random.h" />
     <ClInclude Include="test_reference.h" />
     <ClInclude Include="test_set.h" />
+    <ClInclude Include="test_size.h" />
+    <ClInclude Include="test_sort.h" />
     <ClInclude Include="test_static.h" />
     <ClInclude Include="test_template.h" />
     <ClInclude Include="test_time_cost.h" />
     <ClInclude Include="test_try_catch.h" />
     <ClInclude Include="test_typedef.h" />
+    <ClInclude Include="test_vtable.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>

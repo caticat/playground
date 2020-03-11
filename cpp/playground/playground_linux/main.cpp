@@ -18,6 +18,10 @@
 #include "test_try_catch.h"
 #include "test_static.h"
 #include "test_epoll.h"
+#include "test_size.h"
+#include "test_sort.h"
+#include "test_map.h"
+#include "test_vtable.h"
 
 using namespace std;
 
@@ -44,7 +48,11 @@ int main()
 	//test_set::test(); // set测试
 	//test_try_catch::test(); // try_catch测试
 	//test_static::test(); // static测试
-	test_epoll::test(); // epoll测试
+	//test_epoll::test(); // epoll测试
+	//test_size::test(); // size测试
+	//test_sort::test(); // sort测试
+	//test_map::test(); // map测试
+	test_vtable::test(); // vtable测试
 
 	cout << "playground结束" << endl;
 
