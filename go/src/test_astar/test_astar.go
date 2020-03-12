@@ -1,6 +1,6 @@
 package test_astar
 
-func Test() {
+func test1() {
 	c := NewAStarCalculator()
 	c.SetPosBegin(NewPosXY(2, 2))
 	c.SetPosEnd(NewPosXY(6, 2))
@@ -20,4 +20,36 @@ func Test() {
 	//c.SetAroundEnable(true)
 	c.Calculate()
 	c.Graph()
+}
+
+func test2() {
+	c := NewAStarCalculator()
+	c.SetPosBegin(NewPosXY(2, 2))
+	c.SetPosEnd(NewPosXY(6, 2))
+	c.SetBlock([]*Pos{
+		NewPosXY(0, 0),
+		NewPosXY(1, 1),
+		NewPosXY(2, 1),
+		NewPosXY(3, 1),
+		NewPosXY(4, 1),
+		NewPosXY(5, 1),
+		NewPosXY(5, 2),
+		NewPosXY(5, 3),
+		NewPosXY(4, 3),
+		NewPosXY(3, 3),
+		NewPosXY(2, 3),
+		NewPosXY(1, 3),
+		NewPosXY(1, 4),
+		NewPosXY(1, 5),
+		//NewPosXY(1, 6),
+	})
+	c.SetPosBorder(NewPosXY(9, 7))
+	//c.SetAroundEnable(true)
+	c.Calculate()
+	c.Graph()
+}
+
+func Test() {
+	test1()
+	test2()
 }
