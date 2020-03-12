@@ -14,8 +14,10 @@ func Test() {
 		NewPosXY(5, 5),
 		NewPosXY(6, 5),
 		NewPosXY(7, 5),
+		//NewPosXY(8, 5),
 	})
 	c.SetPosBorder(NewPosXY(9, 7))
+	//c.SetAroundEnable(true)
 	c.Calculate()
 	c.Graph()
 }

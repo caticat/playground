@@ -1,4 +1,5 @@
 // 使用第四象限
+// 开闭结构都使用slice，可以优化为有序list+map的组合，但是优化后代码就不够清晰了，影响理解，就这样吧
 
 package test_astar
 
@@ -8,10 +9,11 @@ import (
 )
 
 type AStarCalculator struct {
-	posBegin  *Pos   // 起始点
-	posEnd    *Pos   // 终点
-	sliBlock  []*Pos // 阻挡点
-	posBorder *Pos   // 边界右下角坐标
+	posBegin     *Pos   // 起始点
+	posEnd       *Pos   // 终点
+	sliBlock     []*Pos // 阻挡点
+	posBorder    *Pos   // 边界右下角坐标
+	aroundEnable bool   // 是否开启斜向寻路
 
 	posCur   *AStarNode   // 当前寻路计算点
 	sliOpen  []*AStarNode // 待处理的点
@@ -23,9 +25,10 @@ func NewAStarCalculator() *AStarCalculator {
 	return &AStarCalculator{}
 }
 
-func (this *AStarCalculator) SetPosBegin(pos *Pos)  { this.posBegin = pos }
-func (this *AStarCalculator) SetPosEnd(pos *Pos)    { this.posEnd = pos }
-func (this *AStarCalculator) SetPosBorder(pos *Pos) { this.posBorder = pos }
+func (this *AStarCalculator) SetPosBegin(pos *Pos)        { this.posBegin = pos }
+func (this *AStarCalculator) SetPosEnd(pos *Pos)          { this.posEnd = pos }
+func (this *AStarCalculator) SetPosBorder(pos *Pos)       { this.posBorder = pos }
+func (this *AStarCalculator) SetAroundEnable(enable bool) { this.aroundEnable = enable }
 func (this *AStarCalculator) SetBlock(sliBlock []*Pos) {
 	for _, block := range sliBlock {
 		this.sliBlock = append(this.sliBlock, block)
@@ -38,6 +41,9 @@ func (this *AStarCalculator) Calculate() bool {
 		fmt.Println("检测边界出错:", err)
 		return false
 	}
+
+	// 重置
+	this.result = nil
 
 	// 将起始点加入到开列表
 	this.sliOpen = append(this.sliOpen, NewAStarNodeByPos(this.posBegin))
@@ -61,8 +67,7 @@ func (this *AStarCalculator) Graph() {
 	}
 
 	sliPos := []*Pos{this.result.Pos()}
-	n := this.result.pFront
-	for ; n != nil; n = n.pFront {
+	for n := this.result.pFront; n != nil; n = n.pFront {
 		sliPos = append(sliPos, n.Pos())
 	}
 
@@ -106,9 +111,9 @@ func (this *AStarCalculator) Graph() {
 				} else if *this.posEnd == *cur {
 					buf.WriteString("B ")
 				} else if this.isPosInSlice(cur, sliPos) {
-					buf.WriteString("* ")
+					buf.WriteString("@ ")
 				} else if this.isPosInSlice(cur, this.sliBlock) {
-					buf.WriteString("= ")
+					buf.WriteString("# ")
 				} else {
 					buf.WriteString("  ")
 				}
@@ -122,6 +127,7 @@ func (this *AStarCalculator) Graph() {
 }
 
 func (this *AStarCalculator) checkBorder() error {
+	// 获取到所有相关点的最大值
 	xMax := uint32(0)
 	yMax := uint32(0)
 	sliPos := make([]*Pos, 0, len(this.sliBlock))
@@ -137,6 +143,7 @@ func (this *AStarCalculator) checkBorder() error {
 		}
 	}
 
+	// 边界检测
 	if this.posBorder == nil {
 		this.posBorder = NewPosXY(xMax+2, yMax+2)
 	} else {
@@ -204,6 +211,20 @@ func (this *AStarCalculator) step() {
 	sliAround = append(sliAround, NewPosXY(xCur, yCur+1))
 	sliAround = append(sliAround, NewPosXY(xCur+1, yCur))
 
+	// 整理斜向四个点
+	if this.aroundEnable {
+		if (xCur > 0) && (yCur > 0) {
+			sliAround = append(sliAround, NewPosXY(xCur-1, yCur-1))
+		}
+		if xCur > 0 {
+			sliAround = append(sliAround, NewPosXY(xCur-1, yCur+1))
+		}
+		if yCur > 0 {
+			sliAround = append(sliAround, NewPosXY(xCur+1, yCur-1))
+		}
+		sliAround = append(sliAround, NewPosXY(xCur+1, yCur+1))
+	}
+
 	// 遍历处理
 	for _, p := range sliAround {
 		node := NewAStarNodeByPos(p)
@@ -231,7 +252,7 @@ func (this *AStarCalculator) step() {
 				openNode.g = node.g
 				fmt.Println("更新点:", node.Show())
 			} else {
-				//fmt.Println("重复点:", node.Show())
+				fmt.Println("重复点:", node.Show())
 			}
 		} else {
 			this.sliOpen = append(this.sliOpen, node)
