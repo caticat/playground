@@ -11,7 +11,7 @@ namespace test_set
 		cout << "A::test()" << endl;
 	}
 
-	void test()
+	void test1()
 	{
 		set<A*> a;
 		set<A*>::iterator it = a.begin();
@@ -25,5 +25,10 @@ namespace test_set
 		{
 			cout << "为空" << endl;
 		}
+	}
+
+	void test()
+	{
+
 	}
 }

@@ -22,6 +22,17 @@
 #include "test_sort.h"
 #include "test_map.h"
 #include "test_vtable.h"
+#include "test_stack_protector.h"
+#include "test_pointer.h"
+#include "test_warning.h"
+#include "test_string.h"
+#include "test_valgrind.h"
+#include "test_callgrind.h"
+#include "test_unused_variable.h"
+#include "test_enum.h"
+#include "test_heap.h"
+#include "test_array.h"
+#include "test_memset.h"
 
 using namespace std;
 
@@ -37,6 +48,8 @@ int main()
 	//test_time_cost::test(); // 时间消耗计算测试,2
 	//test_reference::test(); // 引用测试
 	//test_reference::test_change(); // 引用测试,函数调用与内容修改
+	//test_reference::test_base(); // 引用测试
+	//test_reference::test_classC(); // 引用测试头文件包含问题
 	//test_macro::test(); // 测试宏
 	//test_typedef::test(); // typedef作用域测试
 	//test_new::test(); // new测试
@@ -52,7 +65,18 @@ int main()
 	//test_size::test(); // size测试
 	//test_sort::test(); // sort测试
 	//test_map::test(); // map测试
-	test_vtable::test(); // vtable测试
+	//test_vtable::test(); // vtable测试
+	//test_stack_protector::test(); // stack_protector测试
+	//test_pointer::test(); // test_pointer测试
+	//test_warning::test(); // test_warning测试
+	//test_string::test(); // test_string测试
+	//test_valgrind::test(); // test_valgrind测试
+	//test_callgrind::test(); // test_callgrind测试
+	//test_unused_variable::test(); // test_unused_variable测试
+	//test_enum::test(); // test_enum测试
+	//test_heap::test(); // test_heap测试
+	//test_array::test(); // test_array测试
+	test_memset::test(); // test_memset测试
 
 	cout << "playground结束" << endl;
 

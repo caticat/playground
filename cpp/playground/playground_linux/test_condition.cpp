@@ -8,8 +8,6 @@
 		2. 件锁进入阻塞(pthread_cond_wait)时自动解开对应互斥锁，而一旦跳出阻塞立即再次取得互斥锁，而这两个操作都是原子操作。
 */
 
-#pragma once
-
 #include "test_condition.h"
 #include <iostream>
 #include <pthread.h>

@@ -119,7 +119,7 @@ namespace test_epoll
 								buffer[readLen] = '\0';
 								cout << "sock[" << arrEvent[i].data.fd << "]收到数据:" << buffer << endl;
 								sprintf(buffer, "server return");
-								int lenSend = send(arrEvent[i].data.fd, buffer, strlen(buffer), 0); // 这里的逻辑检测就不处理了
+								int lenSend = (int)send(arrEvent[i].data.fd, buffer, strlen(buffer), 0); // 这里的逻辑检测就不处理了
 								cout << "发送数据长度:" << lenSend << endl;
 							}
 						}

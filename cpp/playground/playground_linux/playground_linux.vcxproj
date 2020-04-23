@@ -83,51 +83,74 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test_argv.cpp" />
+    <ClCompile Include="test_array.cpp" />
+    <ClCompile Include="test_callgrind.cpp" />
     <ClCompile Include="test_circle_queue.cpp" />
     <ClCompile Include="test_condition.cpp" />
+    <ClCompile Include="test_enum.cpp" />
     <ClCompile Include="test_epoll.cpp" />
+    <ClCompile Include="test_heap.cpp" />
     <ClCompile Include="test_hiredis.cpp" />
     <ClCompile Include="test_macro.cpp" />
     <ClCompile Include="test_map.cpp" />
+    <ClCompile Include="test_memset.cpp" />
     <ClCompile Include="test_mysql.cpp" />
     <ClCompile Include="test_new.cpp" />
     <ClCompile Include="test_perf.cpp" />
+    <ClCompile Include="test_pointer.cpp" />
     <ClCompile Include="test_random.cpp" />
     <ClCompile Include="test_reference.cpp" />
     <ClCompile Include="test_set.cpp" />
     <ClCompile Include="test_size.cpp" />
     <ClCompile Include="test_sort.cpp" />
+    <ClCompile Include="test_stack_protector.cpp" />
     <ClCompile Include="test_static.cpp" />
+    <ClCompile Include="test_string.cpp" />
     <ClCompile Include="test_template.cpp" />
     <ClCompile Include="test_time_cost.cpp" />
     <ClCompile Include="test_try_catch.cpp" />
     <ClCompile Include="test_typedef.cpp" />
+    <ClCompile Include="test_unused_variable.cpp" />
+    <ClCompile Include="test_valgrind.cpp" />
     <ClCompile Include="test_vtable.cpp" />
+    <ClCompile Include="test_warning.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_argv.h" />
     <ClInclude Include="ObjectPool.h" />
+    <ClInclude Include="test_array.h" />
+    <ClInclude Include="test_callgrind.h" />
     <ClInclude Include="test_circle_queue.h" />
     <ClInclude Include="test_condition.h" />
+    <ClInclude Include="test_enum.h" />
     <ClInclude Include="test_epoll.h" />
+    <ClInclude Include="test_heap.h" />
     <ClInclude Include="test_hiredis.h" />
     <ClInclude Include="test_macro.h" />
     <ClInclude Include="test_map.h" />
+    <ClInclude Include="test_memset.h" />
     <ClInclude Include="test_mysql.h" />
     <ClInclude Include="test_new.h" />
     <ClInclude Include="test_new_1.h" />
     <ClInclude Include="test_perf.h" />
+    <ClInclude Include="test_pointer.h" />
     <ClInclude Include="test_random.h" />
     <ClInclude Include="test_reference.h" />
+    <ClInclude Include="test_reference_r.h" />
     <ClInclude Include="test_set.h" />
     <ClInclude Include="test_size.h" />
     <ClInclude Include="test_sort.h" />
+    <ClInclude Include="test_stack_protector.h" />
     <ClInclude Include="test_static.h" />
+    <ClInclude Include="test_string.h" />
     <ClInclude Include="test_template.h" />
     <ClInclude Include="test_time_cost.h" />
     <ClInclude Include="test_try_catch.h" />
     <ClInclude Include="test_typedef.h" />
+    <ClInclude Include="test_unused_variable.h" />
+    <ClInclude Include="test_valgrind.h" />
     <ClInclude Include="test_vtable.h" />
+    <ClInclude Include="test_warning.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
@@ -142,9 +165,12 @@
     <Link>
       <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib64/mysql;%(Link.AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LibraryDependencies>mysqlclient;pthread;hiredis;</LibraryDependencies>
+      <AdditionalOptions>-fstack-protector-all %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>/usr/local/include;/usr/include;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-fstack-protector-all</AdditionalOptions>
+      <Verbose>false</Verbose>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

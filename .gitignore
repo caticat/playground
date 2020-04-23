@@ -12,3 +12,5 @@ unsuccessfulbuild
 *.idb
 *.idea
 *.a
+pkg
+bin

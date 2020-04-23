@@ -1,11 +1,14 @@
 // 引用测试
 #pragma once
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 namespace test_reference
 {
+	class C;
+
 	struct Pos
 	{
 	public:
@@ -35,7 +38,7 @@ namespace test_reference
 		{
 			cout << "A()" << endl;
 		}
-		~A()
+		virtual ~A()
 		{
 			cout << "~A()" << endl;
 		}
@@ -44,6 +47,16 @@ namespace test_reference
 		Pos p;
 	};
 
+	class B : public A
+	{
+	public:
+		int m_b = 0;
+	};
+
 	void test();
 	void test_change();
+	void test_base();
+	void test_classC();
+	void test_classCr(C& c);
+	void test_classCrv(vector<C>& v);
 }
